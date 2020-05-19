@@ -9,8 +9,8 @@ from django.contrib import admin
 from django.contrib.auth import views as auth_views
 
 urlpatterns = [
-    # Examples:
-    # url(r'^blog/', include('blog.urls', namespace='blog')),
+    # projects urls
+    url(r'^project/', include('projects.urls', namespace='projects')),
 
     # provide the most basic login/logout functionality
     url(r'^login/$', auth_views.LoginView.as_view(template_name='core/login.html'),

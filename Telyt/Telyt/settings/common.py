@@ -45,6 +45,7 @@ DEFAULT_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'projects',
 ]
 
 # Middlewares
@@ -90,7 +91,7 @@ SECRET_FILE = normpath(join(PROJECT_ROOT, 'run', 'SECRET.key'))
 
 # these persons receive error notification
 ADMINS = (
-    ('your name', 'your_name@example.com'),
+    ('Collins Hillary', 'collinshillary1@gmail.com'),
 )
 MANAGERS = ADMINS
 
