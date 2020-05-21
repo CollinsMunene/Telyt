@@ -3,6 +3,7 @@ from __future__ import unicode_literals
 from django.shortcuts import render
 from django.shortcuts import redirect
 from django.http import HttpResponse, HttpResponseRedirect
+from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from .models import Projects,Files
 from .forms import ProjectCreateForm
@@ -11,10 +12,12 @@ import requests
 
 # Create your views here.
 # -*- coding: utf-8 -*-
+@login_required
 def index(request):
     form = ProjectCreateForm()
-    return render(request, 'core/index.html',{'mes':'this is a message','form':form})
+    return render(request, 'core/index.html',{'mes':'this is a message','form':form,'user':request.user})
 
+@login_required
 def project_create(request):
     #if post
     if request.method == 'POST':

@@ -32,7 +32,7 @@ PROJECT_TEMPLATES = [
 ]
 
 # add apps/ to the Python path
-sys.path.append(normpath(join(PROJECT_ROOT, 'apps')))
+#sys.path.append(normpath(join(PROJECT_ROOT, 'apps')))
 
 
 # ##### APPLICATION CONFIGURATION #########################
@@ -40,11 +40,15 @@ sys.path.append(normpath(join(PROJECT_ROOT, 'apps')))
 # these are the apps
 DEFAULT_APPS = [
     'django.contrib.admin',
+    'allauth', 
+    'allauth.account', 
+    'allauth.socialaccount', 
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites',
     'projects',
 ]
 
@@ -78,6 +82,11 @@ TEMPLATES = [
         },
     },
 ]
+
+AUTHENTICATION_BACKENDS = ( 
+    'django.contrib.auth.backends.ModelBackend', 
+    'allauth.account.auth_backends.AuthenticationBackend', 
+)
 
 # Internationalization
 USE_I18N = False
@@ -127,3 +136,29 @@ except IOError:
             f.write(SECRET_KEY)
     except IOError:
         raise Exception('Could not open %s for writing!' % SECRET_FILE)
+
+#allauth configs
+SITE_ID = 1
+
+ACCOUNT_EMAIL_REQUIRED=True
+ACCOUNT_AUTHENTICATION_METHOD="email"
+ACCOUNT_EMAIL_CONFIRMATION_EXPIRE_DAYS=1
+ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_EMAIL_VERIFICATION = "mandatory"
+ACCOUNT_LOGIN_ATTEMPTS_LIMIT = 5
+ACCOUNT_LOGIN_ATTEMPTS_TIMEOUT = 86400
+
+
+# using mailhog for email sending
+EMAIL_HOST = '0.0.0.0'
+EMAIL_PORT = 1025
+EMAIL_HOST_USER = ''
+EMAIL_HOST_PASSWORD = ''
+EMAIL_USE_TLS = False
+
+# using gmail smtp server
+# EMAIL_HOST = 'smtp.gmail.com'
+# EMAIL_PORT = 587
+# EMAIL_HOST_USER = '<email username>'
+# EMAIL_HOST_PASSWORD = '<email password>'
+# EMAIL_USE_TLS = True

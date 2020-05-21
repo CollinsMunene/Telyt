@@ -12,10 +12,13 @@ urlpatterns = [
     # projects urls
     url(r'^project/', include('projects.urls', namespace='projects')),
 
+    #allauth urls
+    url(r'^accounts/', include('allauth.urls')),
+
     # provide the most basic login/logout functionality
-    url(r'^login/$', auth_views.LoginView.as_view(template_name='core/login.html'),
-        name='core_login'),
-    url(r'^logout/$', auth_views.LogoutView.as_view(), name='core_logout'),
+    # url(r'^login/$', auth_views.LoginView.as_view(template_name='core/login.html'),
+    #     name='core_login'),
+    # url(r'^logout/$', auth_views.LogoutView.as_view(), name='core_logout'),
 
     # enable the admin interface
     url(r'^admin/', admin.site.urls),

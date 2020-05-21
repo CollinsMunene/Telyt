@@ -9,6 +9,7 @@
     {% endfor %}
 </ul>
 {% endif %}
+{{ user }}
 <form action="{% url 'projects:projectadd' %}" method="POST">
     {% csrf_token %}
     {{ form.as_p }}

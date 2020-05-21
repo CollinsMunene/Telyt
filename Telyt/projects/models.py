@@ -9,7 +9,7 @@ class Projects(models.Model):
     # owner = models.OneToOneField(User, on_delete=models.CASCADE, null=True)
     project_name = models.CharField(max_length=300)
     created_date = models.DateTimeField(default=now, editable=True)
-    project_status = models.CharField(max_length=1, choices=(('C', 'Completed'), ('Ip', 'InProgress'),('P','Pending')), blank=False, default='P')
+    project_status = models.CharField(max_length=20, choices=(('C', 'Completed'), ('Ip', 'InProgress'),('P','Pending')), blank=False, default='P')
     staff_handling = models.CharField(max_length=300,default="select staff")
 
     def __str__(self):

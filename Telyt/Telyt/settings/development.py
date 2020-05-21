@@ -15,9 +15,10 @@ DEBUG = True
 ALLOWED_HOSTS = ['*']
 
 # adjust the minimal login
-LOGIN_URL = 'core_login'
-LOGIN_REDIRECT_URL = '/'
-LOGOUT_REDIRECT_URL = 'core_login'
+LOGIN_URL = 'account_login'
+LOGIN_REDIRECT_URL = 'projects:index'
+LOGOUT_REDIRECT_URL = 'account_login'
+
 
 
 # ##### DATABASE CONFIGURATION ############################
