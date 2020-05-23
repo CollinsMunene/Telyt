@@ -6,16 +6,25 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from .models import Projects,Files
-from .forms import ProjectCreateForm
+from .forms import ProjectCreateForm,FileUploadForm
 import requests
 
 
 # Create your views here.
 # -*- coding: utf-8 -*-
-@login_required
 def index(request):
-    form = ProjectCreateForm()
-    return render(request, 'core/index.html',{'mes':'this is a message','form':form,'user':request.user})
+    return render(request, 'core/index.html',{})
+
+@login_required
+def dashboard(request):
+    projects = Projects.objects.all()
+    user_projects = projects.filter(owner=request.user)
+    form = ProjectCreateForm(instance=request.user)
+    context = {
+        'form': form,
+        'projects': user_projects,
+    }
+    return render(request, 'core/dashboard.html',context)
 
 @login_required
 def project_create(request):
@@ -25,19 +34,54 @@ def project_create(request):
         form = ProjectCreateForm(request.POST)
         #if form is valid
         if form.is_valid():
-            form.save()
+            # process form data
+            obj = Projects() #gets new object
+            obj.project_name = form.cleaned_data['project_name']
+            obj.owner = request.user
+            #finally save the object in db
+            obj.save()
             #success message
             messages.info(request, 'Project Creation succeded')
             #redirect
             project_name = form.cleaned_data['project_name']
-            project_detailForm = FileAddForm()
-            return render(request, 'core/projectpopulate.html',{'project_name':project_name,'form':project_detailForm})
+            projects = Projects.objects.all()
+            projectDetails = projects.filter(owner=request.user).filter(project_name=project_name)
+            f_form = FileUploadForm()
+            context = {
+                'project_name':project_name,
+                'projectDetails': projectDetails,
+                'f_form':f_form,
+            }
+            return render(request, 'core/projectpopulate.html',context)
     #if any other method
     else:
         #re-initialize form
-        form = ProjectCreateForm()
+        form = ProjectCreateForm(instance=request.user)
         #error message
         messages.info(request, 'Project Creation failed')
         # return HttpResponse('METHOD SHOULD BE POST')
     
     return render(request, 'core/index.html',{'mes':'this is a message','form':form})
+
+def file_upload(request,projectname):
+    # Handle file upload
+    if request.method == 'POST':
+        print(projectname)
+        projects = Projects.objects.all()
+        projectDetails = projects.filter(owner=request.user).filter(project_name=project_name)
+        f_form = FileUploadForm()
+        form = FileUploadForm(request.POST, request.FILES)
+        if form.is_valid():
+            # process form data
+            newdoc = Files() #gets new object
+            project_parent = projectDetails
+            newdoc.file_upload = request.FILES['files']
+            newdoc.file_name = request.FILES['files'].name
+            #finally save the object in db
+            newdoc.save()
+
+            # Redirect to the document list after POST
+            return redirect('projects:projectadd')
+    else:
+        form = FileUploadForm() # A empty, unbound form
+        return redirect('projects:projectadd')

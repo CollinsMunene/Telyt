@@ -16,7 +16,7 @@ ALLOWED_HOSTS = ['*']
 
 # adjust the minimal login
 LOGIN_URL = 'account_login'
-LOGIN_REDIRECT_URL = 'projects:index'
+LOGIN_REDIRECT_URL = 'projects:dashboard'
 LOGOUT_REDIRECT_URL = 'account_login'
 
 

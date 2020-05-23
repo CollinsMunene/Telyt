@@ -194,119 +194,152 @@
         <!-- Begin Page Content -->
         <div class="container-fluid">
 
-            <div class="container">
-                <h3 class="font-weight-bold mb-4">{{project_name}} <span class="badge badge-orange">{% for i in projectDetails %}{{i.project_status}}{% endfor %}</span></h3>
+          <!-- Page Heading -->
+          <div class="d-sm-flex align-items-center justify-content-between mb-4">
+            <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
+            <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
+          </div>
 
+          <!-- Content Row -->
+          <div class="row">
 
-                <div class="container my-5 z-depth-1">
-
-
-                    <!--Section: Content-->
-                    <section class="dark-grey-text">
-                
-                    <div class="row pr-lg-5">
-                        <div class="col-md-12 mb-4">
-                            <div class="row">
-                                <div class="col-md-6">
-                                <h4 class=" mb-4">Uploaded Files</h3>
-                                </div>
-                                <div class="col-md-6">
-                                <div class="btn btn-primary btn-sm float-left">
-                                        <form action="{% url 'projects:filesadd' project_name %}" method="post" enctype="multipart/form-data">
-                                            {% csrf_token %}
-                                            <p>
-                                                {{ f_form.as_p}}
-                                            </p>
-                                            <p><input type="submit" value="Upload" /></p>
-                                        </form>
-                                    
-                                </div>
-                                </div>
-                            </div>
-                        
-                                <table class="table table-hover table-responsive-sm text-nowrap">
-                                    <thead>
-                                    <tr>
-                                        <!-- <th scope="col"></th> -->
-                                        <th scope="col">File Name</th>
-                                        <th scope="col">Upload date</th>
-                                        <!-- <th scope="col">Handle</th> -->
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    <tr>
-                                        <!-- <th scope="row">1</th> -->
-                                        <td>Evidence video</td>
-                                        <td>12.6.2020</td>
-                                        <td><a href="#"><span class="badge badge-primary"><i class="fas fa-download" aria-hidden="true"></i></span></a></td>
-                                        <!-- <td>@mdo</td> -->
-                                    </tr>
-                                    <tr>
-                                        <!-- <th scope="row">1</th> -->
-                                        <td>Evidence video</td>
-                                        <td>12.6.2020</td>
-                                        <td><a href="#"><span class="badge badge-primary"><i class="fas fa-download" aria-hidden="true"></i></span></a></td>
-                                        <!-- <td>@mdo</td> -->
-                                    </tr>
-                                    </tbody>
-                                </table>
-                        </div>
+            <!-- Earnings (Monthly) Card Example -->
+            <div class="col-xl-5 col-md-6 mb-4">
+              <div class="card border-left-primary shadow h-100 py-2">
+                <div class="card-body">
+                  <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                      <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Total Projects</div>
+                      <div class="h5 mb-0 font-weight-bold text-gray-800">10</div>
                     </div>
-                
-                    </section>
-                    <!--Section: Content-->
-                
-                
-                </div>
-
-
-                <div class="container my-5 z-depth-1">
-
-
-                    <!--Section: Content-->
-                    <section class="dark-grey-text">
-                
-                    <div class="row pr-lg-12">
-                        <div class="col-md-7 mb-4">
-                            <h4 class=" mb-4">Complete Reviewed Document</h3>
-                                <table class="table table-hover table-responsive-sm text-nowrap">
-                                    <thead>
-                                    <tr>
-                                        <!-- <th scope="col"></th> -->
-                                        <th scope="col">File Name</th>
-                                        <th scope="col">Completed date</th>
-                                        <th scope="col">Status</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    <tr>
-                                        <!-- <th scope="row">1</th> -->
-                                        <td>Reviewed Document.docx</td>
-                                        <td>12.6.2020</td>
-                                        <td>Completed</td>
-                                        <td><a href="#"><span class="badge badge-primary"><i class="fas fa-download" aria-hidden="true"></i></span></a></td>
-                                    </tr>
-
-                                    </tbody>
-                                </table>
-                        </div>
-                        <!-- <div class="col-md-5 d-flex align-items-center">
-                        <div>
-                            <h4 class=" mb-4">Project Status</h3>
-                                <span class="badge badge-warning">Pending</span>
-                
-                        </div>
-                        </div> -->
+                    <div class="col-auto">
+                      <i class="fas fa-calendar fa-2x text-gray-300"></i>
                     </div>
-                
-                    </section>
-                    <!--Section: Content-->
-                
-                
+                  </div>
                 </div>
+              </div>
             </div>
+
+            <!-- Earnings (Monthly) Card Example -->
+            <div class="col-xl-5 col-md-6 mb-4">
+              <div class="card border-left-success shadow h-100 py-2">
+                <div class="card-body">
+                  <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                      <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Completed Projects</div>
+                      <div class="h5 mb-0 font-weight-bold text-gray-800">5</div>
+                    </div>
+                    <div class="col-auto">
+                      <i class="fas fa-briefcase fa-2x text-gray-300"></i>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Earnings (Monthly) Card Example -->
+            <!-- <div class="col-xl-4 col-md-6 mb-4">
+              <div class="card border-left-info shadow h-100 py-2">
+                <div class="card-body">
+                  <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                      <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Incomplete</div>
+                      <div class="row no-gutters align-items-center">
+                        <div class="col-auto">
+                          <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">50%</div>
+                        </div>
+                        <div class="col">
+                          <div class="progress progress-sm mr-2">
+                            <div class="progress-bar bg-info" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-auto">
+                      <i class="fas fa-clipboard-list fa-2x text-gray-300"></i>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div> -->
+
+            <!-- Pending Requests Card Example -->
+            <!-- <div class="col-xl-4 col-md-6 mb-4">
+              <div class="card border-left-warning shadow h-100 py-2">
+                <div class="card-body">
+                  <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                      <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">Pending Requests</div>
+                      <div class="h5 mb-0 font-weight-bold text-gray-800">18</div>
+                    </div>
+                    <div class="col-auto">
+                      <i class="fas fa-comments fa-2x text-gray-300"></i>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div> -->
+
+        <div class="container">
+           <!-- Page Heading -->
+           <h1 class="h3 mb-2 text-gray-800">All Projects</h1>
+          
+           <!-- DataTales Example -->
+           <div class="card shadow mb-4">
+             <div class="card-header py-3">
+               <!-- <h6 class="m-0 font-weight-bold text-primary">DataTables Example</h6> -->
+             </div>
+             <div class="card-body">
+               <div class="table-responsive">
+                 <table class="table table-bordered table-hover" id="dataTable" width="100%" cellspacing="0">
+                   <thead>
+                     <tr>
+                       <th>Project Name</th>
+                       <th>Start date</th>
+                       <th>Status</th>
+                       <!-- <th>Age</th>
+                       <th>Start date</th>
+                       <th>Salary</th> -->
+                     </tr>
+                   </thead>
+                   <tfoot>
+                     <tr>
+                      <th>Project Name</th>
+                      <th>Start date</th>
+                      <th>Status</th>
+                       <!-- <th>Age</th>
+                       <th>Start date</th>
+                       <th>Salary</th> -->
+                     </tr>
+                   </tfoot>
+                   <tbody>
+                    {% for i in projects %}
+                     <tr>
+                       <td>{{i.project_name}}</td>
+                       <td>{{i.created_date}}</td>
+                       <td>{{i.project_status}}</td>
+                       <!-- <td>61</td>
+                       <td>2011/04/25</td>
+                       <td>$320,800</td> -->
+                     </tr>
+                     {% endfor %}
+                   </tbody>
+                 </table>
+               </div>
+             </div>
+           </div>
+         
+          </div>
+      <!-- Footer -->
+      <footer class="sticky-footer bg-white">
+        <div class="container my-auto">
+          <div class="copyright text-center my-auto">
+            <!-- <span>Copyright &copy; Your Website 2019</span> -->
+          </div>
         </div>
-        </div>
+      </footer>
+      <!-- End of Footer -->
 
     </div>
     <!-- End of Content Wrapper -->

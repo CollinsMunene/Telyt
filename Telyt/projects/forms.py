@@ -11,3 +11,9 @@ class ProjectCreateForm(forms.ModelForm):
         fields = [
             'project_name',
         ]
+
+class FileUploadForm(forms.Form):
+    files = forms.FileField(
+        label='Upload File',
+        help_text='max. 42 megabytes'
+    )

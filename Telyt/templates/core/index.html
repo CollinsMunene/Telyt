@@ -1,18 +1,254 @@
 {% extends 'base.html' %}
+{% load static %}
 {% block content %}
-<h1>INDEX FILE</h1>
-<p>{{mes}}</p>
-{% if messages %}
-<ul class="messages">
-    {% for message in messages %}
-    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
-    {% endfor %}
-</ul>
-{% endif %}
-{{ user }}
-<form action="{% url 'projects:projectadd' %}" method="POST">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <input type="submit" value="Submit">
-</form>
+        <!-- particles.js container -->
+        <div id="particles-js" style="height:720px;">
+            <div class="centered">
+              <div class="row">
+                <!--Grid column-->
+                <div class="col-md-12 mb-4 white-text text-center">
+                  <!-- <h1 class="h1-reponsive white-text text-uppercase font-weight-bold mb-0 pt-md-5 pt-5 wow fadeInDown" -->
+                    <!-- data-wow-delay="0.3s"><strong>Telyt Solutions</strong></h1> -->
+                    <h3 class="display-3 font-weight-bold white-text mb-0 pt-md-5 pt-5">Telyt Solutions</h3>
+                  <hr class="hr-light my-4 wow fadeInDown" data-wow-delay="0.4s">
+                  <h5 class="text-uppercase mb-4 white-text wow fadeInDown" data-wow-delay="0.4s"><strong>Research &
+                    Qualitative Analysis
+                  </strong></h5>
+                  <a class="btn btn-outline-white wow fadeInDown" data-wow-delay="0.4s">Get Started</a>
+                </div>
+                <!--Grid column-->
+              </div>
+            </div>
+          </div>
+        <!-- Main navigation -->
+  
+         <!-- about section -->
+         <div class="container my-5 py-5 z-depth-1">
+  
+   
+          <!--Section: Content-->
+          <section class="px-md-5 mx-md-5 dark-grey-text text-center text-lg-left">
+      
+            <!--Grid row-->
+            <div class="row">
+      
+              <!--Grid column-->
+              <div class="col-lg-6 mb-4 mb-lg-0 d-flex align-items-center justify-content-center">
+      
+                <img src="{% static 'telyt3.png'%}" class="img-fluid" alt="">
+      
+              </div>
+              <!--Grid column-->
+      
+              <!--Grid column-->
+              <div class="col-lg-6 mb-4 mb-lg-0">
+      
+                <h3 class="font-weight-bold" id="about">ABOUT US</h3>
+      
+                <!-- <p class="font-weight-bold">That's a very nice subheading</p> -->
+      
+                <p class="text-muted">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Id quam sapiente
+                  molestiae
+                  numquam quas, voluptates omnis nulla ea odio quia similique corrupti magnam, doloremque laborum.</p>
+      
+              <button type="button" class="btn btn-primary"><a href="{% url 'account_signup' %}" style="color: white;"> Join Us</a></button>
+      
+              </div>
+              <!--Grid column-->
+      
+            </div>
+            <!--Grid row-->
+      
+      
+          </section>
+          <!--Section: Content-->
+      
+        </div>
+  
+  
+          <!-- services section -->
+          <div class="container z-depth-1 my-5 py-5">
+  
+            <!-- Section -->
+            <section>
+            
+          
+              <!-- <h6 class="font-weight-bold text-center grey-text text-uppercase small mb-4">Services</h6> -->
+              <h3 class="font-weight-bold text-center dark-grey-text pb-2" id="services">Our Services</h3>
+              <hr class="w-header my-4">
+              <p class="lead text-center text-muted pt-2 mb-5">We at Telyt offer the following services</p>
+          
+              <div class="row d-flex justify-content-center">
+          
+                <div class="col-md-6 col-lg-5 col-xl-4 text-center">
+                    <h5 class="font-weight-normal pt-4 mb-4" style="border-top:1px solid #ebfd0a ;"><a class="dark-grey-text"
+                        href="#">Analysis</a></h5>
+                        <p class="mt-4 pt-2"><i class="far fa-object-ungroup fa-4x"></i></p>
+                    <p class="text-muted mb-5 pb-md-3">Written enquire painful to offices forming it. Then so does over sent
+                      dull. Likewise offended humour mrs
+                      fat trifling answered. On ye position greatest so desirous enable performance based.</p>
+                  </div>
+          
+                <div class="col-md-6 col-lg-5 col-xl-4 text-center" >
+                  <h5 class="font-weight-normal pt-4 mb-4" style="border-top:1px solid #ebfd0a ;"><a class="dark-grey-text"
+                      href="#">Analysis</a></h5>
+                      <p class="mt-4 pt-2"><i class="far fa-object-ungroup fa-4x"></i></p>
+                  <p class="text-muted mb-5 pb-md-3">Written enquire painful to offices forming it. Then so does over sent
+                    dull. Likewise offended humour mrs
+                    fat trifling answered. On ye position greatest so desirous enable performance based.</p>
+                </div>
+                <div class="col-md-6 col-lg-5 col-xl-4 text-center">
+                    <h5 class="font-weight-normalpt-4 mb-4" style="border-top:1px solid #ebfd0a ;"><a class="dark-grey-text"
+                        href="#">Analysis</a></h5>
+                        <p class="mt-4 pt-2"><i class="far fa-object-ungroup fa-4x"></i></p>
+                    <p class="text-muted mb-5 pb-md-3">Written enquire painful to offices forming it. Then so does over sent
+                      dull. Likewise offended humour mrs
+                      fat trifling answered. On ye position greatest so desirous enable performance based.</p>
+                  </div>
+                  <div class="col-md-6 col-lg-5 col-xl-4 text-center">
+                    <h5 class="font-weight-normal pt-4 mb-4" style="border-top:1px solid #ebfd0a ;"><a class="dark-grey-text"
+                        href="#">Analysis</a></h5>
+                        <p class="mt-4 pt-2"><i class="far fa-object-ungroup fa-4x"></i></p>
+                    <p class="text-muted mb-5 pb-md-3">Written enquire painful to offices forming it. Then so does over sent
+                      dull. Likewise offended humour mrs
+                      fat trifling answered. On ye position greatest so desirous enable performance based.</p>
+                  </div>
+                  <div class="col-md-6 col-lg-5 col-xl-4 text-center">
+                    <h5 class="font-weight-normal pt-4 mb-4" style="border-top:1px solid #ebfd0a ;"><a class="dark-grey-text"
+                        href="#">Analysis</a></h5>
+                        <p class="mt-4 pt-2"><i class="far fa-object-ungroup fa-4x"></i></p>
+                    <p class="text-muted mb-5 pb-md-3">Written enquire painful to offices forming it. Then so does over sent
+                      dull. Likewise offended humour mrs
+                      fat trifling answered. On ye position greatest so desirous enable performance based.</p>
+                  </div>
+                  <div class="col-md-6 col-lg-5 col-xl-4 text-center">
+                    <h5 class="font-weight-normal pt-4 mb-4" style="border-top:1px solid #ebfd0a ;"><a class="dark-grey-text"
+                        href="#">Analysis</a></h5>
+                        <p class="mt-4 pt-2"><i class="far fa-object-ungroup fa-4x"></i></p>
+                    <p class="text-muted mb-5 pb-md-3">Written enquire painful to offices forming it. Then so does over sent
+                      dull. Likewise offended humour mrs
+                      fat trifling answered. On ye position greatest so desirous enable performance based.</p>
+                  </div>
+          
+                <div class="w-100"></div>
+          
+                <div class="col-md-6 col-lg-5 col-xl-4 text-center">
+                    <h5 class="font-weight-normal pt-4 mb-4" style="border-top:1px solid #ebfd0a ;"><a class="dark-grey-text"
+                        href="#">Analysis</a></h5>
+                        <p class="mt-4 pt-2"><i class="far fa-object-ungroup fa-4x"></i></p>
+                    <p class="text-muted mb-5 pb-md-3">Written enquire painful to offices forming it. Then so does over sent
+                      dull. Likewise offended humour mrs
+                      fat trifling answered. On ye position greatest so desirous enable performance based.</p>
+                  </div>
+          
+                  <div class="col-md-6 col-lg-5 col-xl-4 text-center">
+                    <h5 class="font-weight-normal pt-4 mb-4" style="border-top:1px solid #ebfd0a ;"><a class="dark-grey-text"
+                        href="#">Analysis</a></h5>
+                        <p class="mt-4 pt-2"><i class="far fa-object-ungroup fa-4x"></i></p>
+                    <p class="text-muted mb-5 pb-md-3">Written enquire painful to offices forming it. Then so does over sent
+                      dull. Likewise offended humour mrs
+                      fat trifling answered. On ye position greatest so desirous enable performance based.</p>
+                  </div>
+          
+              </div>
+            </section>
+            <!-- Section -->
+          </div>
+  
+          <!-- call to action -->
+          <div class="contain my-5 px-0 z-depth-1">
+  
+  
+            <!--Section: Content-->
+            <section class="text-center white-text d-md-flex justify-content-between p-5 " style="background-color:#2196F3;">
+          
+              <h3 class="font-weight-bold mb-md-0 mb-4 mt-2 pt-1">We deliver to our promises.</h3>
+              
+             <button type="button" class="btn btn-white btn-rounded"><a href="{% url 'account_signup' %}">Sign Up</a></button>
+          
+            </section>
+            <!--Section: Content-->
+          
+          
+          </div>
+    
+  
+          <!-- testimonials -->
+          <div class="container-fluid my-5 px-5 pt-5 pb-3" id="testimonials">
+    
+            <!--Section: Content-->
+            <section class="text-center dark-grey-text">
+             
+              <!-- Grid row -->
+              <div class="row">
+          
+                <!-- Grid column -->
+                <div class="col-md-12 mb-4">
+          
+                  <div class="wrapper-carousel-fix">
+                  
+                    <!-- Carousel Wrapper -->
+                    <div id="carousel-example-1" class="carousel no-flex testimonial-carousel slide" data-ride="carousel"
+                      data-interval="false">
+                      <!--Slides-->
+                      <div class="carousel-inner" role="listbox">
+                        <!--First slide-->
+                        <div class="carousel-item active">
+                          <p class="lead font-italic">"Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugit, error amet numquam iure provident voluptate esse quasi, voluptas nostrum quisquam!"</p>
+                          <div class="view card-img-64 mx-auto mt-5 mb-4">
+                            <img src="https://mdbootstrap.com/img/Photos/Avatars/img%20(2).jpg" class="rounded-circle img-fluid" alt="smaple image">
+                          </div>
+                          <p class="text-muted">- Anna Morian</p>
+                        </div>
+                        <!--First slide-->
+                        <!--Second slide-->
+                        <div class="carousel-item">
+                          <p class="lead font-italic">"Neque cupiditate assumenda in maiores repudiandae mollitia adipisci maiores repudiandae mollitia consectetur adipisicing architecto elit sed adipiscing elit."</p>
+                          <div class="view card-img-64 mx-auto mt-5 mb-4">
+                            <img src="https://mdbootstrap.com/img/Photos/Avatars/img%20(31).jpg" class="rounded-circle img-fluid" alt="smaple image">
+                          </div>
+                          <p class="text-muted">- Teresa May</p>
+                        </div>
+                        <!--Second slide-->
+                        <!--Third slide-->
+                        <div class="carousel-item">
+                          <p class="lead font-italic">"Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur est laborum neque cupiditate assumenda in maiores."</p>
+                          <div class="view card-img-64 mx-auto mt-5 mb-4">
+                            <img src="https://mdbootstrap.com/img/Photos/Avatars/img%20(10).jpg" class="rounded-circle img-fluid" alt="smaple image">
+                          </div>
+                          <p class="text-muted">- Kate Allise</p>
+                        </div>
+                        <!--Third slide-->
+                      </div>
+                      <!--Slides-->
+                      <!--Controls-->
+                      <a class="carousel-control-prev left carousel-control" href="#carousel-example-1" role="button"
+                        data-slide="prev">
+                        <span class="icon-prev" aria-hidden="true">
+                          <i class="fa fa-chevron-right" aria-hidden="true"></i>
+                        </span>
+                        <span class="sr-only">Previous</span>
+                      </a>
+                      <a class="carousel-control-next right carousel-control" href="#carousel-example-1" role="button"
+                        data-slide="next">
+                        <span class="icon-next" aria-hidden="true"></span>
+                        <span class="sr-only">Next</span>
+                      </a>
+                      <!--Controls-->
+                    </div>
+                    <!-- Carousel Wrapper -->
+                    
+                  </div>
+                  
+                </div>
+                <!-- Grid column -->
+          
+              </div>
+              <!-- Grid row -->
+              
+            </section>
+            <!--Section: Content-->
+          
+          
+          </div> 
 {% endblock %}
