@@ -195,7 +195,7 @@
         <div class="container-fluid">
 
             <div class="container">
-                <h3 class="font-weight-bold mb-4">{{project_name}} <span class="badge badge-orange">{% for i in projectDetails %}{{i.project_status}}{% endfor %}</span></h3>
+                <h3 class="font-weight-bold mb-4">{{project_name}} <span class="badge badge-warning">{% for i in projectDetails %}{{i.project_status}}{% endfor %}</span></h3>
 
 
                 <div class="container my-5 z-depth-1">
@@ -234,20 +234,15 @@
                                     </tr>
                                     </thead>
                                     <tbody>
+                                      {% for i in fileDetails %}
                                     <tr>
                                         <!-- <th scope="row">1</th> -->
-                                        <td>Evidence video</td>
-                                        <td>12.6.2020</td>
+                                        <td>{{i.file_name}}</td>
+                                        <td>{{i.upload_date}}</td>
                                         <td><a href="#"><span class="badge badge-primary"><i class="fas fa-download" aria-hidden="true"></i></span></a></td>
                                         <!-- <td>@mdo</td> -->
                                     </tr>
-                                    <tr>
-                                        <!-- <th scope="row">1</th> -->
-                                        <td>Evidence video</td>
-                                        <td>12.6.2020</td>
-                                        <td><a href="#"><span class="badge badge-primary"><i class="fas fa-download" aria-hidden="true"></i></span></a></td>
-                                        <!-- <td>@mdo</td> -->
-                                    </tr>
+                                    {% endfor %}
                                     </tbody>
                                 </table>
                         </div>

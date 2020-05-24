@@ -27,6 +27,33 @@ def dashboard(request):
     return render(request, 'core/dashboard.html',context)
 
 @login_required
+def project_details(request,projectname):
+    files = Files.objects.all()
+    fileDetails = files.filter(project_parent__project_name__contains=projectname)
+    projects = Projects.objects.all()
+    projectDetails = projects.filter(owner=request.user).filter(project_name=projectname)
+    if projectDetails.count() == 0:
+            projects = Projects.objects.all()
+            user_projects = projects.filter(owner=request.user)
+            form = ProjectCreateForm(instance=request.user)
+            context = {
+                'form': form,
+                'projects': user_projects,
+            }
+            return render(request, 'core/dashboard.html',context)
+    else:
+        f_form = FileUploadForm()
+        form = ProjectCreateForm()
+        context = {
+            'project_name':projectname,
+            'projectDetails': projectDetails,
+            'f_form':f_form,
+            'form':form,
+            'fileDetails':fileDetails
+        }
+        return render(request, 'core/projectpopulate.html',context)
+
+@login_required
 def project_create(request):
     #if post
     if request.method == 'POST':
@@ -68,20 +95,21 @@ def file_upload(request,projectname):
     if request.method == 'POST':
         print(projectname)
         projects = Projects.objects.all()
-        projectDetails = projects.filter(owner=request.user).filter(project_name=project_name)
+        projectDetails = projects.filter(owner=request.user).filter(project_name=projectname)
+        project = Projects.objects.get(project_name=projectname)
         f_form = FileUploadForm()
         form = FileUploadForm(request.POST, request.FILES)
         if form.is_valid():
             # process form data
             newdoc = Files() #gets new object
-            project_parent = projectDetails
+            newdoc.project_parent = project
             newdoc.file_upload = request.FILES['files']
             newdoc.file_name = request.FILES['files'].name
             #finally save the object in db
             newdoc.save()
 
             # Redirect to the document list after POST
-            return redirect('projects:projectadd')
+            return redirect('projects:projectdetails projectname')
     else:
         form = FileUploadForm() # A empty, unbound form
-        return redirect('projects:projectadd')
+        return redirect('projects:projectdetails projectname')

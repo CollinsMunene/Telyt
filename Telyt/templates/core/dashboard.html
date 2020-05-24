@@ -316,7 +316,7 @@
                    <tbody>
                     {% for i in projects %}
                      <tr>
-                       <td>{{i.project_name}}</td>
+                       <td><a href="{% url 'projects:projectdetails' i.project_name %}">{{i.project_name}}</a></td>
                        <td>{{i.created_date}}</td>
                        <td>{{i.project_status}}</td>
                        <!-- <td>61</td>

@@ -10,6 +10,7 @@ urlpatterns = [
     url(r'^$',views.index,name="index"),
     url(r'^index/',views.index,name="index"),
     url(r'^dashboard/',views.dashboard,name="dashboard"),
+    url(r'^projectdetails/(?P<projectname>\w+)',views.project_details,name="projectdetails"),
     url(r'^projectadd/',views.project_create,name="projectadd"),
     url(r'^filesadd/(?P<projectname>\w+)/$',views.file_upload,name="filesadd"),
     
