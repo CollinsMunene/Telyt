@@ -141,7 +141,7 @@ except IOError:
         raise Exception('Could not open %s for writing!' % SECRET_FILE)
 
 #allauth configs
-SITE_ID = 3
+SITE_ID = 1
 
 ACCOUNT_EMAIL_REQUIRED=True
 ACCOUNT_AUTHENTICATION_METHOD="email"
