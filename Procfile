@@ -1,1 +1,1 @@
-web: gunicorn Telyt.wsgi --log-file -
+web: gunicorn --chdir Telyt Telyt.wsgi --log-file -

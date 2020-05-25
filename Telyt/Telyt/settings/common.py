@@ -50,7 +50,6 @@ DEFAULT_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.sites',
     'projects',
-    'gunicorn',
 ]
 
 # Middlewares
