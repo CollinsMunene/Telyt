@@ -5,6 +5,7 @@ The `urlpatterns` list routes URLs to views. For more information please see:
 """
 # Django imports
 from django.conf.urls import include, url
+from django.urls import path
 from django.contrib import admin
 from django.contrib.auth import views as auth_views
 from django.conf import settings
@@ -14,6 +15,7 @@ urlpatterns = [
     # projects urls
     url(r'^', include('projects.urls', namespace='projects')),
     url(r'^/', include('projects.urls', namespace='projects')),
+    path('/', include('projects.urls', namespace='projects')),
 
     #allauth urls
     url(r'^accounts/', include('allauth.urls')),
