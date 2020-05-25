@@ -1,1 +1,1 @@
-web: python3 Telyt/manage.py runserver
+web: python3 Telyt/manage.py runserver 3000
