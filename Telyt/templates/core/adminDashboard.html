@@ -209,7 +209,7 @@
                 <div class="card-body">
                   <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
-                      <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Total Projects</div>
+                      <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Total Users</div>
                       <div class="h5 mb-0 font-weight-bold text-gray-800">10</div>
                     </div>
                     <div class="col-auto">
@@ -283,7 +283,7 @@
 
         <div class="container">
            <!-- Page Heading -->
-           <h1 class="h3 mb-2 text-gray-800">All Projects</h1>
+           <h1 class="h3 mb-2 text-gray-800">All Users</h1>
           
            <!-- DataTales Example -->
            <div class="card shadow mb-4">
@@ -295,9 +295,9 @@
                  <table class="table table-bordered table-hover" id="dataTable" width="100%" cellspacing="0">
                    <thead>
                      <tr>
-                       <th>Project Name</th>
-                       <th>Start date</th>
-                       <th>Status</th>
+                       <th>Username</th>
+                       <th>Email</th>
+                       <!-- <th>Status</th> -->
                        <!-- <th>Age</th>
                        <th>Start date</th>
                        <th>Salary</th> -->
@@ -305,24 +305,20 @@
                    </thead>
                    <tfoot>
                      <tr>
-                      <th>Project Name</th>
-                      <th>Start date</th>
-                      <th>Status</th>
+                        <th>Username</th>
+                        <th>Email</th>
+                      <!-- <th>Status</th> -->
                        <!-- <th>Age</th>
                        <th>Start date</th>
                        <th>Salary</th> -->
                      </tr>
                    </tfoot>
                    <tbody>
-                    {% for i in projects %}
+                    {% for i in users %}
                      <tr>
-                      {% if user.is_superuser %}
-                      <td><a href="{% url 'projects:adminprojectdetails' i.id %}">{{i.project_name}}</a></td>
-                      {% else %}
-                      <td><a href="{% url 'projects:projectdetails' i.id %}">{{i.project_name}}</a></td>
-                      {% endif %}
-                       <td>{{i.created_date}}</td>
-                       <td>{{i.project_status}}</td>
+                       <!-- <td><a href="">{{i.project_name}}</a></td> -->
+                       <td><a href="{% url 'projects:userprojects' i.id %}">{{i.username}}</a></td>
+                       <td>{{i.email}}</td>
                        <!-- <td>61</td>
                        <td>2011/04/25</td>
                        <td>$320,800</td> -->

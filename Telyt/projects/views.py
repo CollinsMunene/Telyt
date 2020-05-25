@@ -5,6 +5,7 @@ from django.shortcuts import redirect
 from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
+from django.contrib.auth.models import User
 from .models import Projects,Files
 from .forms import ProjectCreateForm,FileUploadForm
 import requests
@@ -113,3 +114,40 @@ def file_upload(request,projectname):
     else:
         form = FileUploadForm() # A empty, unbound form
         return redirect('projects:projectdetails projectname')
+
+@login_required
+def admindashboard(request):
+    if request.user.is_superuser:
+        users = User.objects.all()
+        context = {
+            'users': users,
+        }
+        return render(request, 'core/adminDashboard.html',context)
+    else:
+        HttpResponse("hello ordinary")
+
+@login_required
+def user_projects(request,username):
+    projects = Projects.objects.all()
+    user_projects = projects.filter(owner=username)
+    if user_projects.count() == 0:
+        context = {
+            'projects': user_projects,
+        }
+        return render(request, 'core/dashboard.html',context)
+    else:
+        context = {
+            'projects': user_projects,
+        }
+        return render(request, 'core/dashboard.html',context)
+
+@login_required
+def adminproject_details(request,projectname):
+    files = Files.objects.all()
+    print(projectname)
+    fileDetails = files.filter(project_parent=projectname)
+    context = {
+        'fileDetails':fileDetails
+    }
+    return render(request, 'core/adminprojectpopulate.html',context)
+            
