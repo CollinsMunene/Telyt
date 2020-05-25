@@ -13,7 +13,7 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     # projects urls
-    url(r'^$', include('projects.urls', namespace='projects')),
+    url(r'^', include('projects.urls', namespace='projects')),
 
     #allauth urls
     url(r'^accounts/', include('allauth.urls')),
