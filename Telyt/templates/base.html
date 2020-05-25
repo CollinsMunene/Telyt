@@ -51,11 +51,14 @@
                <!-- buttons  -->
                <ul class="navbar-nav nav-flex-icons">
                 {% if user.is_authenticated %}
-                    <li class="nav-item">
+                    <!-- <li class="nav-item">
                         <a class="nav-link" href="{% url 'account_logout' %}">
                             <button type="button" class="btn btn-primary waves-effect">log out</button>
                         </a>
-                    </li>
+                    </li> -->
+                    <a class="collapse-item" href="#" data-toggle="modal" data-target="#logoutModal">
+                      <button type="button" class="btn btn-primary waves-effect">Logout</button>
+                    </a>
                 {% else %}
                     <li class="nav-item">
                         <a class="nav-link" href="{% url 'account_signup' %}">
@@ -76,7 +79,31 @@
       <!-- Main navigation -->
       {% block content %}base.html{% endblock %}
 
-
+        <!-- Logout Modal-->
+        <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+          <div class="modal-content">
+              <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+              <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">×</span>
+              </button>
+              </div>
+              <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+              <div class="modal-footer">
+              <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+              <!-- <a class="btn btn-primary" href="{% url 'account_logout' %}">Logout</a> -->
+              <form method="post" action="{% url 'account_logout' %}">
+                  {% csrf_token %}
+                  {% if redirect_field_value %}
+                  <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}"/>
+                  {% endif %}
+                  <button type="submit" class="btn btn-primary">Log Out</button>
+                </form>
+              </div>
+          </div>
+          </div>
+        </div>
         <!-- Footer -->
         <footer class="page-footer font-small" style="background-color: #2196F3;"> 
 
