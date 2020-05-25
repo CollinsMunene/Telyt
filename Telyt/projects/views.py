@@ -18,14 +18,19 @@ def index(request):
 
 @login_required
 def dashboard(request):
-    projects = Projects.objects.all()
-    user_projects = projects.filter(owner=request.user)
-    form = ProjectCreateForm(instance=request.user)
-    context = {
-        'form': form,
-        'projects': user_projects,
-    }
-    return render(request, 'core/dashboard.html',context)
+    if request.user.is_superuser:
+        return redirect('projects:admindashboard')
+    else:
+        projects = Projects.objects.all()
+        user_projects = projects.filter(owner=request.user)
+        form = ProjectCreateForm(instance=request.user)
+        total_projects = user_projects.count()
+        context = {
+            'total_projects':total_projects,
+            'form': form,
+            'projects': user_projects,
+        }
+        return render(request, 'core/dashboard.html',context)
 
 @login_required
 def project_details(request,projectname):
@@ -36,8 +41,10 @@ def project_details(request,projectname):
     if projectDetails.count() == 0:
             projects = Projects.objects.all()
             user_projects = projects.filter(owner=request.user)
+            total_projects = user_projects.count()
             form = ProjectCreateForm(instance=request.user)
             context = {
+                'total_projects':total_projects,
                 'form': form,
                 'projects': user_projects,
             }
@@ -119,8 +126,10 @@ def file_upload(request,projectname):
 def admindashboard(request):
     if request.user.is_superuser:
         users = User.objects.all()
+        total_users = users.count()
         context = {
             'users': users,
+            'total_users':total_users,
         }
         return render(request, 'core/adminDashboard.html',context)
     else:
@@ -130,13 +139,16 @@ def admindashboard(request):
 def user_projects(request,username):
     projects = Projects.objects.all()
     user_projects = projects.filter(owner=username)
+    total_projects = user_projects.count()
     if user_projects.count() == 0:
         context = {
+            'total_projects':total_projects,
             'projects': user_projects,
         }
         return render(request, 'core/dashboard.html',context)
     else:
         context = {
+            'total_projects':total_projects,
             'projects': user_projects,
         }
         return render(request, 'core/dashboard.html',context)
@@ -144,10 +156,9 @@ def user_projects(request,username):
 @login_required
 def adminproject_details(request,projectname):
     files = Files.objects.all()
-    print(projectname)
     fileDetails = files.filter(project_parent=projectname)
     context = {
-        'fileDetails':fileDetails
+        'fileDetails':fileDetails,
     }
     return render(request, 'core/adminprojectpopulate.html',context)
             
