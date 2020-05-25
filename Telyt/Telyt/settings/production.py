@@ -4,6 +4,22 @@ from .development import *
 # turn off all debugging
 DEBUG = False
 
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'console': {
+            'class': 'logging.StreamHandler',
+        },
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['console'],
+             'level': os.getenv('DJANGO_LOG_LEVEL', 'DEBUG'),
+        },
+    },
+}
+
 # You will have to determine, which hostnames should be served by Django
 ALLOWED_HOSTS = [
     'localhost',
