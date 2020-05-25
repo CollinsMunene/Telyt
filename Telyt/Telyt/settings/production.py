@@ -2,7 +2,7 @@
 from .development import *
 import os
 # turn off all debugging
-DEBUG = False
+DEBUG = True
 
 LOGGING = {
     'version': 1,
