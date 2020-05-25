@@ -5,7 +5,10 @@ from .development import *
 DEBUG = False
 
 # You will have to determine, which hostnames should be served by Django
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    '127.0.0.1',
+    'telyt-solutions.herokuapp.com/',
+]
 
 # ##### SECURITY CONFIGURATION ############################
 
