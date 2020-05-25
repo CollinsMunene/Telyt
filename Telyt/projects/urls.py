@@ -8,6 +8,7 @@ app_name = 'projects'
 urlpatterns = [
     # 
     url(r'^$',views.index,name="index"),
+    url(r'^/',views.index,name="index"),
     url(r'^index/',views.index,name="index"),
     url(r'^dashboard/',views.dashboard,name="dashboard"),
     url(r'^projectdetails/(?P<projectname>\w+)',views.project_details,name="projectdetails"),
