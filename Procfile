@@ -1,1 +1,1 @@
-web: python3 Telyt/manage.py runserver 3000
+web: gunicorn Telyt.wsgi --log-file -
