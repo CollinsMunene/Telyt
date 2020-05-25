@@ -62,7 +62,15 @@ for a {{ site_name }} account and sign in below:{% endblocktrans %}</p>
 
             <!--Grid column-->
             <div class="col-md-6">
-
+              {% if form.non_field_errors %}
+              
+                  {% for error in form.non_field_errors %}
+                      <div class="alert alert-danger" role="alert">
+                        {{ error }}
+                      </div>
+                  {% endfor %}
+              
+             {% endif %}
             <!-- Default form register -->
             <form class="text-center login" method="POST" action="{% url 'account_login' %}">
               {% csrf_token %}

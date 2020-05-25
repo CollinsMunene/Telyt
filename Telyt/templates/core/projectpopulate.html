@@ -193,7 +193,16 @@
 
         <!-- Begin Page Content -->
         <div class="container-fluid">
-
+          {% if messages %}
+              {% for message in messages %}
+              <div class="alert alert-success alert-dismissible fade show" role="alert">
+                {{ message | safe }}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              {% endfor %}
+          {% endif %}
             <div class="container">
                 <h3 class="font-weight-bold mb-4">{{project_name}} <span class="badge badge-warning">{% for i in projectDetails %}{{i.project_status}}{% endfor %}</span></h3>
 

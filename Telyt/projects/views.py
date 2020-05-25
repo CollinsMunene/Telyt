@@ -76,7 +76,7 @@ def project_create(request):
             #finally save the object in db
             obj.save()
             #success message
-            messages.info(request, 'Project Creation succeded')
+            messages.success(request, 'Project Creation succeded')
             #redirect
             project_name = form.cleaned_data['project_name']
             projects = Projects.objects.all()
@@ -115,7 +115,7 @@ def file_upload(request,projectname):
             newdoc.file_name = request.FILES['files'].name
             #finally save the object in db
             newdoc.save()
-
+            messages.success(request, 'File uploaded successfuly')
             # Redirect to the document list after POST
             return redirect('projects:projectdetails projectname')
     else:
