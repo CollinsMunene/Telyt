@@ -31,6 +31,8 @@ PROJECT_TEMPLATES = [
     join(PROJECT_ROOT, 'templates'),
 ]
 
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
 # add apps/ to the Python path
 #sys.path.append(normpath(join(PROJECT_ROOT, 'apps')))
 
@@ -61,6 +63,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 
 # template stuff
