@@ -15,6 +15,7 @@ urlpatterns = [
     url(r'^filesadd/(?P<projectname>\w+)/$',views.file_upload,name="filesadd"),
     url(r'^admindashboard/',views.admindashboard,name="admindashboard"),
     url(r'^userprojects/(?P<username>\w+)',views.user_projects,name="userprojects"),
-     url(r'^adminprojectdetails/(?P<projectname>\w+)',views.adminproject_details,name="adminprojectdetails"),
+    url(r'^adminprojectdetails/(?P<projectname>\w+)',views.adminproject_details,name="adminprojectdetails"),
     
+     url(r'^profile/',views.profile,name="profile"),
 ]

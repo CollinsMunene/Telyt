@@ -161,4 +161,9 @@ def adminproject_details(request,projectname):
         'fileDetails':fileDetails,
     }
     return render(request, 'core/adminprojectpopulate.html',context)
-            
+
+@login_required
+def profile(request):
+    users = User.objects.all()
+    user_profile = users.filter(username=request.user)
+    return render(request, 'core/profile.html',{'user_profile':user_profile})
