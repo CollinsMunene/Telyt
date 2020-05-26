@@ -2,7 +2,7 @@
 from .development import *
 import os
 # turn off all debugging
-DEBUG = False
+DEBUG = True
 
 LOGGING = {
     'version': 1,
@@ -19,7 +19,6 @@ LOGGING = {
         },
     },
 }
-
 # You will have to determine, which hostnames should be served by Django
 ALLOWED_HOSTS = [
     'localhost',
