@@ -281,7 +281,7 @@
             </div>
           </div> -->
 
-        <div class="container">
+        <div class="container" style="margin-left: 0px;margin-right: 0px;">
            <!-- Page Heading -->
            <h1 class="h3 mb-2 text-gray-800">All Projects</h1>
           
@@ -319,7 +319,7 @@
                       {% if user.is_superuser %}
                       <td><a href="{% url 'projects:adminprojectdetails' i.id %}">{{i.project_name}}</a></td>
                       {% else %}
-                      <td><a href="{% url 'projects:projectdetails' i.id %}">{{i.project_name}}</a></td>
+                      <td><a href="{% url 'projects:projectdetails' i.project_name %}">{{i.project_name}}</a></td>
                       {% endif %}
                        <td>{{i.created_date}}</td>
                        <td>{{i.project_status}}</td>
@@ -336,13 +336,7 @@
          
           </div>
       <!-- Footer -->
-      <footer class="sticky-footer bg-white">
-        <div class="container my-auto">
-          <div class="copyright text-center my-auto">
-            <!-- <span>Copyright &copy; Your Website 2019</span> -->
-          </div>
-        </div>
-      </footer>
+
       <!-- End of Footer -->
 
     </div>
