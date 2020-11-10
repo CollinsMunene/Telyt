@@ -165,3 +165,7 @@ EMAIL_USE_TLS = False
 # EMAIL_HOST_USER = '<email username>'
 # EMAIL_HOST_PASSWORD = '<email password>'
 # EMAIL_USE_TLS = True
+
+if 'DATABASE_URL' in os.environ:
+    import dj_database_url
+    DATABASES = {'default': dj_database_url.config()}
