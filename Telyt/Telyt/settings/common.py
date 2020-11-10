@@ -165,8 +165,3 @@ EMAIL_USE_TLS = False
 # EMAIL_HOST_USER = '<email username>'
 # EMAIL_HOST_PASSWORD = '<email password>'
 # EMAIL_USE_TLS = True
-
-if 'DATABASE_URL' in os.environ:
-    import dj_database_url
-    db_from_env = dj_database_url.config(conn_max_age=600)
-    DATABASES['default'].update(db_from_env)
