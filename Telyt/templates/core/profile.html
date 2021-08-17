@@ -1,6 +1,103 @@
 {% extends 'dashbase.html' %}
 {% load static %}
 {% block content %}
+<style>
+  body{
+    background: -webkit-linear-gradient(left, #3931af, #00c6ff);
+}
+.emp-profile{
+    padding: 3%;
+    margin-top: 3%;
+    margin-bottom: 3%;
+    border-radius: 0.5rem;
+    background: #fff;
+}
+.profile-img{
+    text-align: center;
+}
+.profile-img img{
+    width: 70%;
+    height: 100%;
+}
+.profile-img .file {
+    position: relative;
+    overflow: hidden;
+    margin-top: -20%;
+    width: 70%;
+    border: none;
+    border-radius: 0;
+    font-size: 15px;
+    background: #212529b8;
+}
+.profile-img .file input {
+    position: absolute;
+    opacity: 0;
+    right: 0;
+    top: 0;
+}
+.profile-head h5{
+    color: #333;
+}
+.profile-head h6{
+    color: #0062cc;
+}
+.profile-edit-btn{
+    border: none;
+    border-radius: 1.5rem;
+    width: 70%;
+    padding: 2%;
+    font-weight: 600;
+    color: #6c757d;
+    cursor: pointer;
+}
+.proile-rating{
+    font-size: 12px;
+    color: #818182;
+    margin-top: 5%;
+}
+.proile-rating span{
+    color: #495057;
+    font-size: 15px;
+    font-weight: 600;
+}
+.profile-head .nav-tabs{
+    margin-bottom:5%;
+}
+.profile-head .nav-tabs .nav-link{
+    font-weight:600;
+    border: none;
+}
+.profile-head .nav-tabs .nav-link.active{
+    border: none;
+    border-bottom:2px solid #0062cc;
+}
+.profile-work{
+    padding: 14%;
+    margin-top: -15%;
+}
+.profile-work p{
+    font-size: 12px;
+    color: #818182;
+    font-weight: 600;
+    margin-top: 10%;
+}
+.profile-work a{
+    text-decoration: none;
+    color: #495057;
+    font-weight: 600;
+    font-size: 14px;
+}
+.profile-work ul{
+    list-style: none;
+}
+.profile-tab label{
+    font-weight: 600;
+}
+.profile-tab p{
+    font-weight: 600;
+    color: #0062cc;
+}
+</style>
     <!-- Content Wrapper -->
     <div id="content-wrapper" class="d-flex flex-column">
 
@@ -161,7 +258,7 @@
               <li class="nav-item dropdown no-arrow">
                 <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{user.username}}</span>
-                  <img class="img-profile rounded-circle" src="https://source.unsplash.com/QAB-WJcbgJk/60x60">
+                  <img class="img-profile rounded-circle" src="{{user.profile.image.url}}">
                 </a>
                 <!-- Dropdown - User Information -->
                 <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
@@ -192,19 +289,108 @@
   
           <!-- Begin Page Content -->
           <div class="container-fluid">
-            {% for i in user_profile %}
             <div class="content">
-                <div id="general">
-                    <br>
-                        <p>Name : {{user.username}} </p>
-                        <br>
-                        <p>Email : {{i.email}} </p>
-                        <br>
-
-                        <br>
+                <div class="container emp-profile">
+                  <div class="file btn btn-sm btn-light"> 
+                    <form action="{% url 'projects:profilepicture' user.id %}" method="post" enctype="multipart/form-data">
+                      {% csrf_token %}
+                      <input type="file" name="image" accept="image/*" required="" id="id_image">
+                      <button  type="submit" class="btn-sm btn-primary">Save Photo</button>
+                    </form>
+   
+                    
+                 
+                    <!-- <input type="file"
+                    id="avatar_profile" name="avatar_profile"
+                    accept="image/png, image/jpeg"> -->
+                    <!-- <button class="btn-sm btn-primary" onclick="saveProfilePhoto()">Save Photo</button> -->
                 </div>
+                    {% for i in user_profile %}
+                      <div class="row">
+                          <div class="col-md-4">
+                              <div class="profile-img">
+                                  <img src="{{user.profile.image.url}}" alt=""/>
+                              </div>
+                              
+                          </div>
+                          <div class="col-md-6">
+                              <div class="profile-head">
+                               
+                                          <h5>
+                                            {{user.first_name | capfirst}}  {{user.last_name | capfirst}}
+                                          </h5>
+                                          <h6>
+                                            {{user.email}}
+                                          </h6>
+                                          <p class="proile-rating"> username: {{user.username}}</p>
+                                  <ul class="nav nav-tabs" id="myTab" role="tablist">
+                                      <li class="nav-item">
+                                          <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">My Projects</a>
+                                      </li>
+                                  </ul>
+                              </div>
+                          </div>
+                          <div class="col-md-2">
+                              <button type="button" class="profile-edit-btn" name="btnAddMore"  data-toggle="modal" data-target="#profilemodal">Edit Profile</button>
+                              <div class="modal fade" id="profilemodal" tabindex="-1" role="dialog" aria-labelledby="projecteditModal" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                  <div class="modal-content">
+                                    <div class="modal-header">
+                                      <h5 class="modal-title" id="exampleModalLabel">Edit Profile</h5>
+                                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                      </button>
+                                    </div>
+                                    <div class="modal-body">
+                                      
+                                        <form action="{% url 'projects:profileupdate' i.id %}" method="post">
+                                            {% csrf_token %}
+                                            <p><label for="id_first_name" class="active">First name:</label> 
+                                              <input value="{{user.first_name}}" type="text" name="first_name" value="John" maxlength="30" id="id_first_name">
+                                            </p>
+                                            <p><label for="id_last_name" class="active">Last name:</label> 
+                                              <input value="{{user.last_name}}" type="text" name="last_name" value="Mark" maxlength="150" id="id_last_name">
+                                            </p>
+                                            <p><input type="submit" value="Update"  class="btn btn-primary" /></p>
+                                        </form>
+                                      
+                                    </div>
+                                    <div class="modal-footer">
+                                      <!-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                      <button type="button" class="btn btn-primary">Save changes</button> -->
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                          </div>
+                      </div>
+
+                      <div class="row">
+                          <div class="col-md-4">
+                          </div>
+                          <div class="col-md-8">
+                              <div class="tab-content profile-tab" id="myTabContent">
+                                  <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                                    <div class="row">
+                                      {% for i in my_projects %}
+                                        <div class="col-md-6" style="padding-top: 20px;">
+                                          <div class="card" style="width: 18rem;">
+                                            <div class="card-body">
+                                              <h5 class="card-title">{{i.project_name}}</h5>
+                                              <a href="{% url 'projects:projectdetails' i.id %}" class="btn btn-primary" style="float: right;">View</a>
+                                            </div>
+                                          </div>
+                                        </div>
+                                        <br>
+                                        {% endfor %}
+                                    </div>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                      {% endfor %}        
+              </div>
             </div>
-            {% endfor %}
           </div>
     </div>
 

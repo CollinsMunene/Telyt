@@ -1,5 +1,6 @@
 from django import forms
-from .models import Projects, Files
+from .models import Projects, Files,Profile
+from django.contrib.auth.models import User
 
 #custom project and file upload forms
 
@@ -17,3 +18,18 @@ class FileUploadForm(forms.Form):
         label='Upload File',
         help_text='max. 42 megabytes'
     )
+
+class ProfileUpdateForm(forms.ModelForm):
+
+    class Meta:
+        model = User
+        fields = [
+            'first_name','last_name'
+        ]
+
+class ImageUploadForm(forms.ModelForm):
+    class Meta:
+        model = Profile
+        fields = [
+            'image',
+        ]

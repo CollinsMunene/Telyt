@@ -162,7 +162,7 @@
             <li class="nav-item dropdown no-arrow">
               <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{user.username}}</span>
-                <img class="img-profile rounded-circle" src="https://mdbootstrap.com/img/Photos/Avatars/img%20(3).jpg">
+                <img class="img-profile rounded-circle" src="{{user.profile.image.url}}">
               </a>
               <!-- Dropdown - User Information -->
               <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
@@ -295,40 +295,123 @@
                  <table class="table table-bordered table-hover" id="dataTable" width="100%" cellspacing="0">
                    <thead>
                      <tr>
-                       <th>Project Name</th>
-                       <th>Start date</th>
-                       <th>Status</th>
-                       <!-- <th>Age</th>
-                       <th>Start date</th>
-                       <th>Salary</th> -->
+                       <th style="width: 349px;">Project Name</th>
+                       <th style="width: 324px;">Start date</th>
+                       <th>Action</th>
                      </tr>
                    </thead>
                    <tfoot>
                      <tr>
-                      <th>Project Name</th>
-                      <th>Start date</th>
-                      <th>Status</th>
-                       <!-- <th>Age</th>
-                       <th>Start date</th>
-                       <th>Salary</th> -->
+                      <!-- <th>Project Name</th>
+                      <th>Start date</th> -->
+                      <!-- <th>Action</th> -->
                      </tr>
                    </tfoot>
                    <tbody>
-                    {% for i in projects %}
-                     <tr>
-                      {% if user.is_superuser %}
-                      <td><a href="{% url 'projects:adminprojectdetails' i.id %}">{{i.project_name}}</a></td>
-                      {% else %}
-                      <td><a href="{% url 'projects:projectdetails' i.project_name %}">{{i.project_name}}</a></td>
-                      {% endif %}
-                       <td>{{i.created_date}}</td>
-                       <td>{{i.project_status}}</td>
-                       <!-- <td>61</td>
-                       <td>2011/04/25</td>
-                       <td>$320,800</td> -->
-                     </tr>
-                     {% endfor %}
-                   </tbody>
+                    {% for i in givenprojects %}
+                    <tr>
+                     {% if user.is_superuser %}
+                     <td>{{i.project.project_name}}</td>
+                     <td>{{i.project.created_date}}</td>
+                     <td><a href="{% url 'projects:adminprojectdetails' i.id %}">
+                       <button class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm waves-effect waves-light">View</button></a>
+
+                       <a href="{% url 'projects:adminprojectdetails' i.id %}"> 
+                      <button class="d-none d-sm-inline-block btn btn-sm btn-warning shadow-sm waves-effect waves-light">Edit</button></a>
+
+                      <a href="{% url 'projects:adminprojectdetails' i.id %}">
+                      <button class="d-none d-sm-inline-block btn btn-sm btn-danger shadow-sm waves-effect waves-light"><i class="fas fa-times" aria-hidden="true"></i></button></a>
+                    </td>
+                     {% else %}
+                     <td>{{i.project.project_name}}</td>
+                     <td>{{i.project.created_date}}</td>
+                     <td><a href="{% url 'projects:projectdetails' i.project.id %}">
+                       <button class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm waves-effect waves-light" title="View Project"><i class="fas fa-search" aria-hidden="true"></i></button></a>
+<!-- 
+                       <a href="{% url 'projects:projectdetailsedit' i.id %}">  -->
+                      <button class="d-none d-sm-inline-block btn btn-sm btn-warning shadow-sm waves-effect waves-light " data-toggle="modal" data-target="#projecteditModal{{i.project.id}}" title="Edit Project"><i class="fas fa-edit" aria-hidden="true"></i></button></a>
+                      <div class="modal fade" id="projecteditModal{{i.project.id}}" tabindex="-1" role="dialog" aria-labelledby="projecteditModal" aria-hidden="true">
+                       <div class="modal-dialog" role="document">
+                         <div class="modal-content">
+                           <div class="modal-header">
+                             <h5 class="modal-title" id="exampleModalLabel">Edit Project</h5>
+                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                               <span aria-hidden="true">&times;</span>
+                             </button>
+                           </div>
+                           <div class="modal-body">
+                             
+                               <form action="{% url 'projects:projectdetailsedit' i.project.id %}" method="post" enctype="multipart/form-data">
+                                   {% csrf_token %}
+                                   <!-- {{form.as_p}} -->
+                                   <p>
+                                     <p><label for="id_project_name" class="">Project Name:</label> 
+                                       <input type="text" name="project_name" maxlength="100" required="" id="id_project_name" value="{{i.project.project_name}}">
+                                     </p>
+                                   </p>
+                                   <p><input type="submit" value="Update"  class="btn btn-primary" /></p>
+                               </form>
+                             
+                           </div>
+                           <div class="modal-footer">
+                             <!-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                             <button type="button" class="btn btn-primary">Save changes</button> -->
+                           </div>
+                         </div>
+                       </div>
+                     </div>
+                      <a href="{% url 'projects:projectdetailsdelete' i.project.id %}">
+                      <button class="d-none d-sm-inline-block btn btn-sm btn-danger shadow-sm waves-effect waves-light" title="Delete Project"> <i class="fas fa-times" aria-hidden="true"></i></button></a>
+                      
+                     <button class="d-none d-sm-inline-block btn btn-sm btn-danger shadow-sm waves-effect waves-light" title="Add Participants" data-toggle="modal" data-target="#projectMembers"><i class="fas fa-user-plus" aria-hidden="true" aria-placeholder="add participant"></i></button></a>
+                     <div class="modal fade" id="projectMembers" tabindex="-1" role="dialog" aria-labelledby="projectMembers" aria-hidden="true">
+                       <div class="modal-dialog" role="document">
+                         <div class="modal-content">
+                           <div class="modal-header">
+                             <h5 class="modal-title" id="exampleModalLabel">Add Project Members</h5>
+                             
+                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                               <span aria-hidden="true">&times;</span>
+                             </button>
+                           </div>
+                           <div class="modal-body">
+                             <div class="tops">
+                               <button id="target" onclick="addUsertoProject('{{i.project.id}}')" style="float: right;"  class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm waves-effect waves-light ">Save changes</button>
+                               <input class="form-control" id="myInput" type="text" placeholder="Search..">
+                             </div>
+                            
+                             <br>
+                             {% for u in users %}
+
+                             <div class="container">
+                               <ul class="list-group" id="myList">
+                                 <li class="list-group-item justify-content-between align-items-center"
+                                 style="border: none;
+                                 border-bottom: 1px solid grey;display: flex;">{{u.username}}
+                                 <input type="checkbox" name="checkboxlist" class="checklist" value="{{u.id}}"/>
+                                 </li>
+                               </ul> 
+                             </div>
+
+                             {% endfor %}
+                             
+                           </div>
+                           <div class="modal-footer">
+                           </div>
+                         </div>
+                       </div>
+                     </div>
+                   </td>
+                     {% endif %}
+                      <!-- {% if i.project_status == "P" %}
+                      <td>Pending</td>
+                      {% endif %} -->
+                      
+                      <!-- <td>61</td>
+                      <td>2011/04/25</td>
+                      <td>$320,800</td> -->
+                    </tr>
+                    {% endfor %}
                  </table>
                </div>
              </div>

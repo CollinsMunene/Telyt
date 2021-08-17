@@ -193,7 +193,7 @@
 
         <!-- Begin Page Content -->
         <div class="container-fluid">
-          {% if messages %}
+          <!-- {% if messages %}
               {% for message in messages %}
               <div class="alert alert-success alert-dismissible fade show" role="alert">
                 {{ message | safe }}
@@ -202,11 +202,13 @@
                 </button>
               </div>
               {% endfor %}
-          {% endif %}
+          {% endif %} -->
+          <a href="javascript:history.go(-1)" class="btn">
+            <i class="fas fa-arrow-left fa-sm fa-fw mr-2 text-gray-400"></i>Back</a><br><br>
             <div class="container">
-                <h3 class="font-weight-bold mb-4">{{project_name}} <span class="badge badge-warning">{% for i in projectDetails %}{{i.project_status}}{% endfor %}</span></h3>
-
-
+              {% for i in projectDetails %}
+                <h3 class="font-weight-bold mb-4">{{i.project_name}}</h3>
+              {% endfor %}
                 <div class="container my-5 z-depth-1">
 
 
@@ -217,7 +219,39 @@
                         <div class="col-md-12 mb-4">
                             <div class="row">
                                 <div class="col-md-6">
-                                <h4 class=" mb-4">Uploaded Files</h3>
+                                  <button class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm waves-effect waves-light" data-toggle="modal" data-target="#exampleModal"
+                                  >Upload</button>
+                                  <!-- Modal -->
+                                  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog" role="document">
+                                      <div class="modal-content">
+                                        <div class="modal-header">
+                                          <h5 class="modal-title" id="exampleModalLabel">Upload Files</h5>
+                                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                          </button>
+                                        </div>
+                                        <div class="modal-body">
+                                          {% for i in projectDetails %}
+                                            <form action="{% url 'projects:filesadd' i.id %}" method="post" enctype="multipart/form-data">
+                                                {% csrf_token %}
+                                                <p>
+                                                  <p><label for="id_files">Upload File:</label> 
+                                                    <input type="file" name="files" required="" id="id_files">
+                                                    </p>
+                                                </p>
+                                                <p><input type="submit" value="Upload"  class="btn btn-primary" /></p>
+                                            </form>
+                                            {% endfor %}
+                                        </div>
+                                        <div class="modal-footer">
+                                          <!-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                          <button type="button" class="btn btn-primary">Save changes</button> -->
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                <!-- <h4 class=" mb-4">Uploaded Files</h3>
                                 </div>
                                 <div class="col-md-6">
                                 <div class="btn btn-primary btn-sm float-left">
@@ -230,7 +264,7 @@
                                         </form>
                                     
                                 </div>
-                                </div>
+                                </div> -->
                             </div>
                         
                                 <table class="table table-hover table-responsive-sm text-nowrap">
@@ -239,7 +273,7 @@
                                         <!-- <th scope="col"></th> -->
                                         <th scope="col">File Name</th>
                                         <th scope="col">Upload date</th>
-                                        <!-- <th scope="col">Handle</th> -->
+                                        <th scope="col">Action</th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -248,7 +282,20 @@
                                         <!-- <th scope="row">1</th> -->
                                         <td>{{i.file_name}}</td>
                                         <td>{{i.upload_date}}</td>
-                                        <td><a href="#"><span class="badge badge-primary"><i class="fas fa-download" aria-hidden="true"></i></span></a></td>
+                                        <td>
+                                          <a href="{{i.file_upload.url}}" download>
+                                            <span class="btn btn-primary btn-sm">
+                                              <i class="fas fa-download" aria-hidden="true"> Download</i>
+                                            </span>
+                                          </a>
+                                          {% for a in projectDetails %}
+                                          <a href="{% url 'projects:filesdelete' i.id a.id %}">
+                                            <span class="btn btn-danger btn-sm">
+                                              <i class="fas fa-trash-alt" aria-hidden="true"> Delete</i>
+                                            </span>
+                                          </a>
+                                          {% endfor %}
+                                        </td>
                                         <!-- <td>@mdo</td> -->
                                     </tr>
                                     {% endfor %}
@@ -263,51 +310,6 @@
                 
                 </div>
 
-
-                <div class="container my-5 z-depth-1">
-
-
-                    <!--Section: Content-->
-                    <section class="dark-grey-text">
-                
-                    <div class="row pr-lg-12">
-                        <div class="col-md-7 mb-4">
-                            <h4 class=" mb-4">Complete Reviewed Document</h3>
-                                <table class="table table-hover table-responsive-sm text-nowrap">
-                                    <thead>
-                                    <tr>
-                                        <!-- <th scope="col"></th> -->
-                                        <th scope="col">File Name</th>
-                                        <th scope="col">Completed date</th>
-                                        <th scope="col">Status</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    <tr>
-                                        <!-- <th scope="row">1</th> -->
-                                        <td>Reviewed Document.docx</td>
-                                        <td>12.6.2020</td>
-                                        <td>Completed</td>
-                                        <td><a href="#"><span class="badge badge-primary"><i class="fas fa-download" aria-hidden="true"></i></span></a></td>
-                                    </tr>
-
-                                    </tbody>
-                                </table>
-                        </div>
-                        <!-- <div class="col-md-5 d-flex align-items-center">
-                        <div>
-                            <h4 class=" mb-4">Project Status</h3>
-                                <span class="badge badge-warning">Pending</span>
-                
-                        </div>
-                        </div> -->
-                    </div>
-                
-                    </section>
-                    <!--Section: Content-->
-                
-                
-                </div>
             </div>
         </div>
         </div>
